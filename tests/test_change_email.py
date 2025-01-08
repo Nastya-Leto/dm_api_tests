@@ -19,7 +19,7 @@ class TestChangeEmail:
         password = '123456789'
         new_email = f'{login}New@mail.ru'
 
-        # 1 Создание пользователя
+        # Создание пользователя
         json_data1 = {
             'login': login,
             'email': email,
@@ -30,13 +30,13 @@ class TestChangeEmail:
         print(f'Создание пользователя {response.status_code},{response.text}')
         assert response.status_code == 201, 'Пользователь не был создан'
 
-        # 2 Получение письма из почты
+        # Получение письма из почты
         response = mailhog_api.get_message_from_mail()
         print(f'Получение письма из почты {response.status_code},{response.text}')
         assert response.status_code == 200, 'Письма не были получены'
         resp_js = response.json()
 
-        # 3 Получение токена из письма
+        # Получение токена из письма
         token = None
         for item in resp_js['items']:
             user_data = loads(item['Content']['Body'])
@@ -47,12 +47,12 @@ class TestChangeEmail:
                 print(token)
         assert token is not None, 'Токен не получен'
 
-        # 4 Активация пользователя
+        # Активация пользователя
         response = account_api.activation_user(token)
         assert response.status_code == 200, 'Пользователь не был актививирован'
         print(f'Активация пользователя {response.status_code},{response.text}')
 
-        # 5 Авторизация пользователя
+        # Авторизация пользователя
         json_data2 = {
             'login': login,
             'password': password,
@@ -63,7 +63,7 @@ class TestChangeEmail:
         print(f'Авторизация пользователя {response.status_code},{response.text}')
         assert response.status_code == 200, 'Пользователь не был авторизован'
 
-        # 6 смена email
+        # Изменение email
         json_data3 = {
             "login": login,
             "password": password,
@@ -72,7 +72,18 @@ class TestChangeEmail:
         response = account_api.change_email(json_data3)
         print(f'Смена email {response.status_code},{response.text}')
 
-        # 7 Получение письма из почты
+        # Авторизация пользователя
+        json_data2 = {
+            'login': login,
+            'password': password,
+            'rememberMe': True,
+        }
+
+        response = login_api.authorization_user(json_data2)
+        print(f'Авторизация пользователя {response.status_code},{response.text}')
+        assert response.status_code == 403, 'Пользователь был авторизован, без повторной активации токена'
+
+        # Получение письма из почты
         response = mailhog_api.get_message_from_mail()
         print(f'Получение письма из почты {response.status_code},{response.text}')
         assert response.status_code == 200, 'Письмо не было получено'
