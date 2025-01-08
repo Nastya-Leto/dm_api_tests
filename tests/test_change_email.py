@@ -13,7 +13,7 @@ class TestChangeEmail:
         login_api = LoginApi('http://5.63.153.31:5051')
         mailhog_api = MailHogApi('http://5.63.153.31:5025')
 
-        random_number = random.randint(100, 999)
+        random_number = random.randint(3001, 4000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'
         password = '123456789'
@@ -28,12 +28,12 @@ class TestChangeEmail:
         response = account_api.create_user(json_data1)
 
         print(f'Создание пользователя {response.status_code},{response.text}')
-        assert response.status_code == 201, 'Пользователь не был создан'
+        assert response.status_code == 201, f'Пользователь не был создан,{response.text}'
 
         # Получение письма из почты
         response = mailhog_api.get_message_from_mail()
         print(f'Получение письма из почты {response.status_code},{response.text}')
-        assert response.status_code == 200, 'Письма не были получены'
+        assert response.status_code == 200, f'Письма не были получены,{response.text}'
         resp_js = response.json()
 
         # Получение токена из письма
@@ -49,7 +49,7 @@ class TestChangeEmail:
 
         # Активация пользователя
         response = account_api.activation_user(token)
-        assert response.status_code == 200, 'Пользователь не был актививирован'
+        assert response.status_code == 200, f'Пользователь не был актививирован{response.text}'
         print(f'Активация пользователя {response.status_code},{response.text}')
 
         # Авторизация пользователя
@@ -61,7 +61,7 @@ class TestChangeEmail:
 
         response = login_api.authorization_user(json_data2)
         print(f'Авторизация пользователя {response.status_code},{response.text}')
-        assert response.status_code == 200, 'Пользователь не был авторизован'
+        assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
         # Изменение email
         json_data3 = {
@@ -81,12 +81,12 @@ class TestChangeEmail:
 
         response = login_api.authorization_user(json_data2)
         print(f'Авторизация пользователя {response.status_code},{response.text}')
-        assert response.status_code == 403, 'Пользователь был авторизован, без повторной активации токена'
+        assert response.status_code == 403, f'Пользователь был авторизован, без повторной активации токена{response.text}'
 
         # Получение письма из почты
         response = mailhog_api.get_message_from_mail()
         print(f'Получение письма из почты {response.status_code},{response.text}')
-        assert response.status_code == 200, 'Письмо не было получено'
+        assert response.status_code == 200, f'Письмо не было получено{response.text}'
         resp_js2 = response.json()
 
         new_token = None
@@ -100,7 +100,7 @@ class TestChangeEmail:
 
         # Повторная активация пользователя
         response = account_api.activation_user(new_token)
-        assert response.status_code == 200, 'Пользователь был актививирован'
+        assert response.status_code == 200, f'Пользователь был актививирован{response.text}'
         print(f'Повторная активация пользователя {response.status_code},{response.text}')
 
         # Авторизация пользователя c новым email
@@ -112,14 +112,14 @@ class TestChangeEmail:
 
         response = login_api.authorization_user(json_data2)
         print(f'Получение авторизация пользователя {response.status_code},{response.text}')
-        assert response.status_code == 200, 'Пользователь не был авторизован'
+        assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
     def test_unsuccessful_change_email_user(self):
         account_api = AccountApi('http://5.63.153.31:5051')
         login_api = LoginApi('http://5.63.153.31:5051')
         mailhog_api = MailHogApi('http://5.63.153.31:5025')
 
-        random_number = random.randint(100, 999)
+        random_number = random.randint(4001, 5000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'
         password = '123456789'
@@ -134,12 +134,12 @@ class TestChangeEmail:
         response = account_api.create_user(json_data1)
 
         print(f'Создание пользователя {response.status_code},{response.text}')
-        assert response.status_code == 201, 'Пользователь не был создан'
+        assert response.status_code == 201, f'Пользователь не был создан {response.text}'
 
         # 2 Получение письма из почты
         response = mailhog_api.get_message_from_mail()
         print(f'Получение письма из почты {response.status_code},{response.text}')
-        assert response.status_code == 200, 'Письмо не было получено'
+        assert response.status_code == 200, f'Письмо не было получено{response.text}'
         resp_js = response.json()
 
         # 3 Получение токена из письма
@@ -153,7 +153,7 @@ class TestChangeEmail:
 
         # 4 Активация пользователя
         response = account_api.activation_user(token)
-        assert response.status_code == 200, 'Пользователь не был актививирован'
+        assert response.status_code == 200, f'Пользователь не был актививирован{response.text}'
         print(f'Активация пользователя {response.status_code},{response.text}')
 
         # 5 Авторизация пользователя
@@ -165,7 +165,7 @@ class TestChangeEmail:
 
         response = login_api.authorization_user(json_data2)
         print(f'Авторизация пользователя {response.status_code},{response.text}')
-        assert response.status_code == 200, 'Пользователь не был авторизован'
+        assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
         # 6 смена email
         json_data3 = {
@@ -174,5 +174,5 @@ class TestChangeEmail:
             "email": new_email
         }
         response = account_api.change_email(json_data3)
-        assert response.status_code == 400, 'Успешное изменение email на невалидный'
+        assert response.status_code == 400, f'Успешное изменение email на невалидный{response.text}'
         print(f'Смена email {response.status_code},{response.text}')

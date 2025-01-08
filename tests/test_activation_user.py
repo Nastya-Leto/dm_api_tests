@@ -13,7 +13,7 @@ class TestActivationUser:
         login_api = LoginApi('http://5.63.153.31:5051')
         mailhog_api = MailHogApi('http://5.63.153.31:5025')
 
-        random_number = random.randint(100, 999)
+        random_number = random.randint(1000, 2000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'
         password = '123456789'
@@ -27,13 +27,13 @@ class TestActivationUser:
         response = account_api.create_user(json_data1)
 
         print(response.status_code)
-        assert response.status_code == 201, 'Пользователь не был создан'
+        assert response.status_code == 201, f'Пользователь не был создан,{response.text}'
         print(response.text)
 
         # Получение письма из почты
         response = mailhog_api.get_message_from_mail()
         print(response.status_code)
-        assert response.status_code == 200, 'Письмо не было получено'
+        assert response.status_code == 200, f'Письмо не было получено{response.text}'
         resp_js = response.json()
 
         # Получение токена из письма
@@ -61,7 +61,7 @@ class TestActivationUser:
 
         response = login_api.authorization_user(json_data2)
         print(response.status_code)
-        assert response.status_code == 200, 'Пользователь не был авторизован'
+        assert response.status_code == 200, f'Пользователь не был авторизован,{response.text}'
         print(response.text)
 
     def test_unsuccessful_activation_user(self):
@@ -69,7 +69,7 @@ class TestActivationUser:
         account_api = AccountApi('http://5.63.153.31:5051')
         mailhog_api = MailHogApi('http://5.63.153.31:5025')
 
-        random_number = random.randint(100, 999)
+        random_number = random.randint(2001, 3000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'
         password = '123456789'
@@ -83,18 +83,18 @@ class TestActivationUser:
         response = account_api.create_user(json_data1)
 
         print(response.status_code)
-        assert response.status_code == 201, 'Пользователь не был создан'
+        assert response.status_code == 201, f'Пользователь не был создан,{response.text}'
         print(response.text)
 
         # Получение письма из почты
         response = mailhog_api.get_message_from_mail()
         print(response.status_code)
-        assert response.status_code == 200, 'Письмо не было получено'
+        assert response.status_code == 200, f'Письмо не было получено,{response.text}'
         # resp_js = response.json()
 
         # Активация пользователя
         token = None
         response = account_api.activation_user(token)
-        assert response.status_code == 400, 'Успешная активация пользователя с пустым токеном'
+        assert response.status_code == 400, f'Успешная активация пользователя с пустым токеном,{response.text}'
         print(response.status_code)
         print(response.text)

@@ -6,7 +6,7 @@ class TestCreateUser:
     def test_successful_creation_user(self):
         account_api = AccountApi('http://5.63.153.31:5051')
 
-        random_number = random.randint(100, 999)
+        random_number = random.randint(5001, 6000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'
         password = '123456789'
@@ -20,13 +20,13 @@ class TestCreateUser:
         response = account_api.create_user(json_data1)
 
         print(response.status_code)
-        assert response.status_code == 201, 'Пользователь не был создан'
+        assert response.status_code == 201, f'Пользователь не был создан{response.text}'
         print(response.text)
 
     def test_unsuccessful_creation_user(self):
         account_api = AccountApi('http://5.63.153.31:5051')
 
-        random_number = random.randint(100, 999)
+        random_number = random.randint(6001, 7000)
         login = f'aanastya{random_number}'
         email = f'{login}.ru'
         password = '123456789'
