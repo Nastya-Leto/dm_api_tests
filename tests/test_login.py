@@ -70,7 +70,7 @@ class TestLoginUser:
         login_api = LoginApi('http://5.63.153.31:5051')
         mailhog_api = MailHogApi('http://5.63.153.31:5025')
 
-        random_number = random.randint(8000, 8001)
+        random_number = random.randint(8003, 9000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'
         password = '123456789'
