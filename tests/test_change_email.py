@@ -88,7 +88,6 @@ class TestChangeEmail:
         print(f'Получение письма из почты {response.status_code},{response.text}')
         assert response.status_code == 200, 'Письмо не было получено'
         resp_js2 = response.json()
-        # pprint(resp_js)
 
         new_token = None
         for item in resp_js2['items']:
