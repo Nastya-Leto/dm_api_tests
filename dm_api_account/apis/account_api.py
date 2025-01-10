@@ -6,7 +6,7 @@ class AccountApi:
         self.host = host
         self.headers = headers
 
-    def create_user(self, json_data):
+    def post_v1_account(self, json_data):
         """
         POST/v1/account
         Register new user
@@ -18,7 +18,7 @@ class AccountApi:
             json=json_data)
         return response
 
-    def activation_user(self, token):
+    def put_v1_account_token(self, token):
         """
         PUT/v1/account/{token}
         Activate registered user
@@ -29,7 +29,7 @@ class AccountApi:
             url=f'{self.host}/v1/account/{token}')
         return response
 
-    def change_email(self, json_data):
+    def put_v1_account_email(self, json_data):
         """
         PUT/v1/account/email
         Change registered user email

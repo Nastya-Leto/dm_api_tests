@@ -17,7 +17,7 @@ class TestCreateUser:
             'email': email,
             'password': password,
         }
-        response = account_api.create_user(json_data1)
+        response = account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 201, f'Пользователь не был создан{response.text}'
@@ -37,7 +37,7 @@ class TestCreateUser:
             'email': email,
             'password': password,
         }
-        response = account_api.create_user(json_data1)
+        response = account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 400, f'Пользователь был создан c невалидным email {response.text}'

@@ -6,7 +6,7 @@ class LoginApi:
         self.host = host
         self.headers = headers
 
-    def authorization_user(self, json_data):
+    def post_v1_account_login(self, json_data):
         """
         POST/v1/account/login
         Authenticate via credentials

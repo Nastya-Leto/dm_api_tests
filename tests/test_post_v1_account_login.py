@@ -24,7 +24,7 @@ class TestLoginUser:
             'email': email,
             'password': password,
         }
-        response = account_api.create_user(json_data1)
+        response = account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 201, f'Пользователь не был создан{response.text}'
@@ -48,7 +48,7 @@ class TestLoginUser:
         assert token is not None, 'Токен отсутствует'
 
         # Активация пользователя
-        response = account_api.activation_user(token)
+        response = account_api.put_v1_account_token(token)
         print(response.status_code)
         print(response.text)
 
@@ -59,7 +59,7 @@ class TestLoginUser:
             'rememberMe': True,
         }
 
-        response = login_api.authorization_user(json_data2)
+        response = login_api.post_v1_account_login(json_data2)
         print(response.status_code)
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
         print(response.text)
@@ -81,7 +81,7 @@ class TestLoginUser:
             'email': email,
             'password': password,
         }
-        response = account_api.create_user(json_data1)
+        response = account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 201, f'Пользователь не был создан{response.text}'
@@ -111,7 +111,7 @@ class TestLoginUser:
             'rememberMe': True,
         }
 
-        response = login_api.authorization_user(json_data2)
+        response = login_api.post_v1_account_login(json_data2)
         print(response.status_code)
         assert response.status_code == 403, f'Пользователь был авторизован без активации{response.text}'
         print(response.text)

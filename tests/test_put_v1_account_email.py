@@ -25,7 +25,7 @@ class TestChangeEmail:
             'email': email,
             'password': password,
         }
-        response = account_api.create_user(json_data1)
+        response = account_api.post_v1_account(json_data1)
 
         print(f'Создание пользователя {response.status_code},{response.text}')
         assert response.status_code == 201, f'Пользователь не был создан,{response.text}'
@@ -48,7 +48,7 @@ class TestChangeEmail:
         assert token is not None, 'Токен не получен'
 
         # Активация пользователя
-        response = account_api.activation_user(token)
+        response = account_api.put_v1_account_token(token)
         assert response.status_code == 200, f'Пользователь не был актививирован{response.text}'
         print(f'Активация пользователя {response.status_code},{response.text}')
 
@@ -59,7 +59,7 @@ class TestChangeEmail:
             'rememberMe': True,
         }
 
-        response = login_api.authorization_user(json_data2)
+        response = login_api.post_v1_account_login(json_data2)
         print(f'Авторизация пользователя {response.status_code},{response.text}')
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
@@ -69,7 +69,7 @@ class TestChangeEmail:
             "password": password,
             "email": new_email
         }
-        response = account_api.change_email(json_data3)
+        response = account_api.put_v1_account_email(json_data3)
         print(f'Смена email {response.status_code},{response.text}')
 
         # Авторизация пользователя
@@ -79,7 +79,7 @@ class TestChangeEmail:
             'rememberMe': True,
         }
 
-        response = login_api.authorization_user(json_data2)
+        response = login_api.post_v1_account_login(json_data2)
         print(f'Авторизация пользователя {response.status_code},{response.text}')
         assert response.status_code == 403, f'Пользователь был авторизован, без повторной активации токена{response.text}'
 
@@ -99,7 +99,7 @@ class TestChangeEmail:
                 new_token = new_body['ConfirmationLinkUrl'].split('/')[-1]
 
         # Повторная активация пользователя
-        response = account_api.activation_user(new_token)
+        response = account_api.put_v1_account_token(new_token)
         assert response.status_code == 200, f'Пользователь был актививирован{response.text}'
         print(f'Повторная активация пользователя {response.status_code},{response.text}')
 
@@ -110,7 +110,7 @@ class TestChangeEmail:
             'rememberMe': True,
         }
 
-        response = login_api.authorization_user(json_data2)
+        response = login_api.post_v1_account_login(json_data2)
         print(f'Получение авторизация пользователя {response.status_code},{response.text}')
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
@@ -131,7 +131,7 @@ class TestChangeEmail:
             'email': email,
             'password': password,
         }
-        response = account_api.create_user(json_data1)
+        response = account_api.post_v1_account(json_data1)
 
         print(f'Создание пользователя {response.status_code},{response.text}')
         assert response.status_code == 201, f'Пользователь не был создан {response.text}'
@@ -152,7 +152,7 @@ class TestChangeEmail:
         assert token is not None, 'Токен не получен'
 
         # 4 Активация пользователя
-        response = account_api.activation_user(token)
+        response = account_api.put_v1_account_token(token)
         assert response.status_code == 200, f'Пользователь не был актививирован{response.text}'
         print(f'Активация пользователя {response.status_code},{response.text}')
 
@@ -163,7 +163,7 @@ class TestChangeEmail:
             'rememberMe': True,
         }
 
-        response = login_api.authorization_user(json_data2)
+        response = login_api.post_v1_account_login(json_data2)
         print(f'Авторизация пользователя {response.status_code},{response.text}')
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
@@ -173,6 +173,6 @@ class TestChangeEmail:
             "password": password,
             "email": new_email
         }
-        response = account_api.change_email(json_data3)
+        response = account_api.put_v1_account_email(json_data3)
         assert response.status_code == 400, f'Успешное изменение email на невалидный{response.text}'
         print(f'Смена email {response.status_code},{response.text}')
