@@ -4,6 +4,8 @@ from pprint import pprint
 from api_mailhog.apis.mailhog_api import MailHogApi
 from dm_api_account.apis.account_api import AccountApi
 from dm_api_account.apis.login_api import LoginApi
+from restclient.configuration import Configuration as MailhogConfiguration
+from restclient.configuration import Configuration as DmApiConfiguration
 import random
 import structlog
 
@@ -14,9 +16,11 @@ structlog.configure(
 
 class TestChangeEmail:
     def test_successful_change_email_user(self):
-        account_api = AccountApi('http://5.63.153.31:5051')
-        login_api = LoginApi('http://5.63.153.31:5051')
-        mailhog_api = MailHogApi('http://5.63.153.31:5025')
+        dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
+        mailhog_configuration = MailhogConfiguration(host='http://5.63.153.31:5025')
+        account_api = AccountApi(configuration=dm_api_configuration)
+        login_api = LoginApi(configuration=dm_api_configuration)
+        mailhog_api = MailHogApi(configuration=mailhog_configuration)
 
         random_number = random.randint(3001, 4000)
         login = f'aanastya{random_number}'
@@ -120,9 +124,11 @@ class TestChangeEmail:
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
     def test_unsuccessful_change_email_user(self):
-        account_api = AccountApi('http://5.63.153.31:5051')
-        login_api = LoginApi('http://5.63.153.31:5051')
-        mailhog_api = MailHogApi('http://5.63.153.31:5025')
+        dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
+        mailhog_configuration = MailhogConfiguration(host='http://5.63.153.31:5025')
+        account_api = AccountApi(configuration=dm_api_configuration)
+        login_api = LoginApi(configuration=dm_api_configuration)
+        mailhog_api = MailHogApi(configuration=mailhog_configuration)
 
         random_number = random.randint(4001, 5000)
         login = f'aanastya{random_number}'
