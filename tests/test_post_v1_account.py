@@ -1,7 +1,6 @@
 import random
-
-from dm_api_account.apis.account_api import AccountApi
 from restclient.configuration import Configuration as DmApiConfiguration
+from services.dm_api_account import DMApiAccount
 import structlog
 
 structlog.configure(
@@ -12,7 +11,7 @@ structlog.configure(
 class TestCreateUser:
     def test_successful_creation_user(self):
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
-        account_api = AccountApi(configuration=dm_api_configuration)
+        account = DMApiAccount(configuration=dm_api_configuration)
 
         random_number = random.randint(5001, 6000)
         login = f'aanastya{random_number}'
@@ -25,7 +24,7 @@ class TestCreateUser:
             'email': email,
             'password': password,
         }
-        response = account_api.post_v1_account(json_data1)
+        response = account.account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 201, f'Пользователь не был создан{response.text}'
@@ -33,7 +32,7 @@ class TestCreateUser:
 
     def test_unsuccessful_creation_user(self):
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
-        account_api = AccountApi(configuration=dm_api_configuration)
+        account = DMApiAccount(configuration=dm_api_configuration)
 
         random_number = random.randint(6001, 7000)
         login = f'aanastya{random_number}'
@@ -46,7 +45,7 @@ class TestCreateUser:
             'email': email,
             'password': password,
         }
-        response = account_api.post_v1_account(json_data1)
+        response = account.account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 400, f'Пользователь был создан c невалидным email {response.text}'

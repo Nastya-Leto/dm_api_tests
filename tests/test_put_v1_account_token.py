@@ -1,11 +1,10 @@
 import random
 from json import loads
 
-from api_mailhog.apis.mailhog_api import MailHogApi
-from dm_api_account.apis.account_api import AccountApi
-from dm_api_account.apis.login_api import LoginApi
 from restclient.configuration import Configuration as MailhogConfiguration
 from restclient.configuration import Configuration as DmApiConfiguration
+from services.api_mailhog import MailhogApi
+from services.dm_api_account import DMApiAccount
 import structlog
 
 structlog.configure(
@@ -18,9 +17,8 @@ class TestActivationUser:
     def test_successful_activation_user(self):
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
         mailhog_configuration = MailhogConfiguration(host='http://5.63.153.31:5025')
-        account_api = AccountApi(configuration=dm_api_configuration)
-        login_api = LoginApi(configuration=dm_api_configuration)
-        mailhog_api = MailHogApi(configuration=mailhog_configuration)
+        account = DMApiAccount(configuration=dm_api_configuration)
+        mailhog = MailhogApi(configuration=mailhog_configuration)
 
         random_number = random.randint(1000, 2000)
         login = f'aanastya{random_number}'
@@ -33,14 +31,14 @@ class TestActivationUser:
             'email': email,
             'password': password,
         }
-        response = account_api.post_v1_account(json_data1)
+        response = account.account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 201, f'Пользователь не был создан,{response.text}'
         print(response.text)
 
         # Получение письма из почты
-        response = mailhog_api.get_message_from_mail()
+        response = mailhog.mailhog_api.get_message_from_mail()
         print(response.status_code)
         assert response.status_code == 200, f'Письмо не было получено{response.text}'
         resp_js = response.json()
@@ -57,7 +55,7 @@ class TestActivationUser:
         assert token is not None, 'Токен отсутствует'
 
         # Активация пользователя
-        response = account_api.put_v1_account_token(token)
+        response = account.account_api.put_v1_account_token(token)
         print(response.status_code)
         print(response.text)
 
@@ -68,7 +66,7 @@ class TestActivationUser:
             'rememberMe': True,
         }
 
-        response = login_api.post_v1_account_login(json_data2)
+        response = account.login_api.post_v1_account_login(json_data2)
         print(response.status_code)
         assert response.status_code == 200, f'Пользователь не был авторизован,{response.text}'
         print(response.text)
@@ -77,9 +75,8 @@ class TestActivationUser:
 
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
         mailhog_configuration = MailhogConfiguration(host='http://5.63.153.31:5025')
-        account_api = AccountApi(configuration=dm_api_configuration)
-        login_api = LoginApi(configuration=dm_api_configuration)
-        mailhog_api = MailHogApi(configuration=mailhog_configuration)
+        account = DMApiAccount(configuration=dm_api_configuration)
+        mailhog = MailhogApi(configuration=mailhog_configuration)
 
         random_number = random.randint(2001, 3000)
         login = f'aanastya{random_number}'
@@ -92,21 +89,21 @@ class TestActivationUser:
             'email': email,
             'password': password,
         }
-        response = account_api.post_v1_account(json_data1)
+        response = account.account_api.post_v1_account(json_data1)
 
         print(response.status_code)
         assert response.status_code == 201, f'Пользователь не был создан,{response.text}'
         print(response.text)
 
         # Получение письма из почты
-        response = mailhog_api.get_message_from_mail()
+        response = mailhog.mailhog_api.get_message_from_mail()
         print(response.status_code)
         assert response.status_code == 200, f'Письмо не было получено,{response.text}'
         # resp_js = response.json()
 
         # Активация пользователя
         token = None
-        response = account_api.put_v1_account_token(token)
+        response = account.account_api.put_v1_account_token(token)
         assert response.status_code == 400, f'Успешная активация пользователя с пустым токеном,{response.text}'
         print(response.status_code)
         print(response.text)
