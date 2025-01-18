@@ -1,5 +1,4 @@
 import random
-
 from dm_api_account.apis.account_api import AccountApi
 from restclient.configuration import Configuration as DmApiConfiguration
 import structlog
@@ -13,6 +12,7 @@ class TestCreateUser:
     def test_successful_creation_user(self):
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
         account_api = AccountApi(configuration=dm_api_configuration)
+
 
         random_number = random.randint(5001, 6000)
         login = f'aanastya{random_number}'
@@ -34,6 +34,7 @@ class TestCreateUser:
     def test_unsuccessful_creation_user(self):
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
         account_api = AccountApi(configuration=dm_api_configuration)
+
 
         random_number = random.randint(6001, 7000)
         login = f'aanastya{random_number}'
