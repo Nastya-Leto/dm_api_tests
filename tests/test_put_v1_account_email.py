@@ -30,7 +30,6 @@ class TestChangeEmail:
 
         account_helper.register_new_user(login, password, email)
         response = account_helper.user_login(login, password)
-        assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
         # Изменение email
         json_data3 = {

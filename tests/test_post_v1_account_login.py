@@ -30,6 +30,7 @@ class TestLoginUser:
         response = account_helper.user_login(login, password)
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
+
     def test_unsuccessful_login(self):
 
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')

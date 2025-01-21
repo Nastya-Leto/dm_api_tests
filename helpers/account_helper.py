@@ -24,7 +24,9 @@ class AccountHelper:
         token = self.get_activation_token_by_login(login,response)
         # Активация пользователя
         response = self.dm_account_api.account_api.put_v1_account_token(token)
+        assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
         return response
+
 
     def user_login(self,login,password, remember_me:bool=True):
 
@@ -35,7 +37,6 @@ class AccountHelper:
         }
 
         response = self.dm_account_api.login_api.post_v1_account_login(json_data)
-
         return response
 
     @staticmethod
