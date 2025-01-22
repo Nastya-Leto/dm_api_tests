@@ -29,42 +29,15 @@ class TestChangeEmail:
         new_email = f'{login}New@mail.ru'
 
         account_helper.register_new_user(login, password, email)
+        account_helper.user_login(login, password)
+        account_helper.change_email_user(login, password, new_email)
         response = account_helper.user_login(login, password)
-
-        # Изменение email
-        json_data3 = {
-            "login": login,
-            "password": password,
-            "email": new_email
-        }
-        account.account_api.put_v1_account_email(json_data3)
-
-        #авторизация после смены email
-        response = account_helper.user_login(login,password)
         assert response.status_code == 403, f'Пользователь был авторизован, без повторной активации токена{response.text}'
 
-        # Получение письма из почты
-        response = mailhog.mailhog_api.get_message_from_mail()
-        assert response.status_code == 200, f'Письмо не было получено{response.text}'
-        response_js = response.json()
-
-        new_token = self.get_new_token(response_js,new_email)
-
-        # Повторная активация пользователя
-        response = account.account_api.put_v1_account_token(new_token)
-        assert response.status_code == 200, f'Пользователь был актививирован{response.text}'
-
-        # Авторизация пользователя c новым email
-        json_data2 = {
-            'login': login,
-            'password': password,
-            'rememberMe': True,
-        }
-
-        response = account.login_api.post_v1_account_login(json_data2)
+        token = account_helper.get_activation_token_by_login(login)
+        account_helper.activation_user(token=token)
+        response = account_helper.user_login(login, password)
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
-
-
 
 
     def test_unsuccessful_change_email_user(self):
@@ -81,25 +54,7 @@ class TestChangeEmail:
         new_email = f'{login}New.ru'
 
         account_helper.register_new_user(login, password, email)
-        response = account_helper.user_login(login, password)
-        assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
-
-        # 6 смена email
-        json_data3 = {
-            "login": login,
-            "password": password,
-            "email": new_email
-        }
-        response = account.account_api.put_v1_account_email(json_data3)
+        account_helper.user_login(login, password)
+        response = account_helper.change_email_user(login, password, new_email)
         assert response.status_code == 400, f'Успешное изменение email на невалидный{response.text}'
 
-    def get_new_token(self, response_js, new_email):
-        new_token = None
-        for item in response_js['items']:
-            json_headers = item['Content']['Headers']['To']
-            new_email_from_message = ''.join(json_headers)
-            pprint(json_headers)
-            if new_email_from_message == new_email:
-                new_body = loads(item['Content']['Body'])
-                new_token = new_body['ConfirmationLinkUrl'].split('/')[-1]
-                return new_token
