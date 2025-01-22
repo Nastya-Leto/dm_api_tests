@@ -34,7 +34,7 @@ class TestChangeEmail:
         response = account_helper.user_login(login, password)
         assert response.status_code == 403, f'Пользователь был авторизован, без повторной активации токена{response.text}'
 
-        token = account_helper.get_activation_token_by_login(login)
+        token = account_helper.get_new_activation_token(new_email=new_email)
         account_helper.activation_user(token=token)
         response = account_helper.user_login(login, password)
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
