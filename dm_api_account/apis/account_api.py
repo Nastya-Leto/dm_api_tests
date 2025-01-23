@@ -15,6 +15,17 @@ class AccountApi(RestClient):
             json=json_data)
         return response
 
+    def get_v1_account(self, **kwargs):
+        """
+        GET/v1/account
+        Get current user
+        :return:
+        """
+        response = self.get(
+            path=f'/v1/account',
+            **kwargs)
+        return response
+
     def put_v1_account_token(self, token):
         """
         PUT/v1/account/{token}
