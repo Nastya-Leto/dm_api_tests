@@ -1,5 +1,3 @@
-from json import loads
-from pprint import pprint
 
 from helpers.account_helper import AccountHelper
 from restclient.configuration import Configuration as MailhogConfiguration
@@ -22,6 +20,7 @@ class TestChangeEmail:
         mailhog = MailhogApi(configuration=mailhog_configuration)
         account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
 
+
         random_number = random.randint(3001, 4000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'
@@ -35,6 +34,7 @@ class TestChangeEmail:
         assert response.status_code == 403, f'Пользователь был авторизован, без повторной активации токена{response.text}'
 
         token = account_helper.get_new_activation_token(new_email=new_email)
+
         account_helper.activation_user(token=token)
         response = account_helper.user_login(login, password)
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'

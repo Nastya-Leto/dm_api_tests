@@ -1,10 +1,10 @@
 import random
-
 from helpers.account_helper import AccountHelper
 from restclient.configuration import Configuration as MailhogConfiguration
 from restclient.configuration import Configuration as DmApiConfiguration
 from services.api_mailhog import MailhogApi
 from services.dm_api_account import DMApiAccount
+
 import structlog
 
 structlog.configure(
@@ -38,7 +38,6 @@ class TestActivationUser:
         account = DMApiAccount(configuration=dm_api_configuration)
         mailhog = MailhogApi(configuration=mailhog_configuration)
         account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
-
         random_number = random.randint(2001, 3000)
         login = f'aanastya{random_number}'
         email = f'{login}@mail.ru'

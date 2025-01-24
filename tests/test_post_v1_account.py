@@ -24,6 +24,7 @@ class TestCreateUser:
         email = f'{login}@mail.ru'
         password = '123456789'
 
+
         response = account_helper.register_new_user(login, password, email)
         assert response.status_code == 200, f'Пользователь не был создан{response.text}'
 
@@ -36,6 +37,7 @@ class TestCreateUser:
         account = DMApiAccount(configuration=dm_api_configuration)
         mailhog = MailhogApi(configuration=mailhog_configuration)
         account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
+
 
         random_number = random.randint(6001, 7000)
         login = f'aanastya{random_number}'

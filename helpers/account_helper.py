@@ -27,6 +27,7 @@ def retrier(function):
     return wrapper
 
 
+
 class AccountHelper:
     def __init__(self, dm_account_api: DMApiAccount, mailhog: MailhogApi):
         self.dm_account_api = dm_account_api
@@ -74,6 +75,7 @@ class AccountHelper:
         }
         response = self.dm_account_api.account_api.put_v1_account_email(json_data=json_data)
         return response
+
 
     @retry(stop_max_attempt_number=5, retry_on_result=retry_if_result_none, wait_fixed=1000)
     def get_activation_token_by_login(self, login):
