@@ -1,3 +1,4 @@
+
 from helpers.account_helper import AccountHelper
 from restclient.configuration import Configuration as MailhogConfiguration
 from restclient.configuration import Configuration as DmApiConfiguration
@@ -18,6 +19,7 @@ class TestChangeEmail:
         account = DMApiAccount(configuration=dm_api_configuration)
         mailhog = MailhogApi(configuration=mailhog_configuration)
         account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
+
 
         random_number = random.randint(3001, 4000)
         login = f'aanastya{random_number}'
@@ -42,6 +44,7 @@ class TestChangeEmail:
         account = DMApiAccount(configuration=dm_api_configuration)
         mailhog = MailhogApi(configuration=mailhog_configuration)
         account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
+
 
         random_number = random.randint(4001, 5000)
         login = f'aanastya{random_number}'
