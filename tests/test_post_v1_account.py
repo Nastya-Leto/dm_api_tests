@@ -44,6 +44,5 @@ class TestCreateUser:
         email = f'{login}.ru'
         password = '123456789'
 
-
         response = account_helper.creating_new_user(login, password, email)
         assert response.status_code == 400, f'Пользователь был создан c невалидным email {response.text}'

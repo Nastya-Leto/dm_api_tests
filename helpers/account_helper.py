@@ -1,7 +1,31 @@
+import time
 from json import loads
-
 from services.dm_api_account import DMApiAccount
 from services.api_mailhog import MailhogApi
+from retrying import retry
+
+
+def retry_if_result_none(result):
+    """Return True if we should retry (in this case when result is None), False otherwise"""
+    return result is None
+
+
+def retrier(function):
+    def wrapper(*args, **kwargs):
+        token = None
+        count = 0
+        while token is None:
+            print(f'Количество попыток{count}')
+            token = function(*args, **kwargs)
+            count += 1
+            if count == 5:
+                raise AssertionError('Превышено количество попыток получения токена')
+            if token:
+                return token
+            time.sleep(1)
+
+    return wrapper
+
 
 
 class AccountHelper:
@@ -24,11 +48,6 @@ class AccountHelper:
 
     def register_new_user(self, login: str, password: str, email: str, with_activate: bool = True):
         # Создание пользователя
-        json_data = {
-            'login': login,
-            'email': email,
-            'password': password,
-        }
         response = self.creating_new_user(login, password, email)
         assert response.status_code == 201, f'Пользователь не был создан{response.text}'
 
@@ -57,8 +76,9 @@ class AccountHelper:
         response = self.dm_account_api.account_api.put_v1_account_email(json_data=json_data)
         return response
 
+
+    @retry(stop_max_attempt_number=5, retry_on_result=retry_if_result_none, wait_fixed=1000)
     def get_activation_token_by_login(self, login):
-        # Получение токена из письма
         token = None
         response = self.mailhog.mailhog_api.get_message_from_mail()
         resp_js = response.json()
@@ -70,6 +90,7 @@ class AccountHelper:
                 assert token is not None, 'Токен отсутствует'
         return token
 
+    @retrier
     def get_new_activation_token(self, new_email):
         new_token = None
         response = self.mailhog.mailhog_api.get_message_from_mail()

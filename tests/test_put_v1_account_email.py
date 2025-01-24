@@ -33,10 +33,12 @@ class TestChangeEmail:
         response = account_helper.user_login(login, password)
         assert response.status_code == 403, f'Пользователь был авторизован, без повторной активации токена{response.text}'
 
-        token = account_helper.get_activation_token_by_login(login)
+        token = account_helper.get_new_activation_token(new_email=new_email)
+
         account_helper.activation_user(token=token)
         response = account_helper.user_login(login, password)
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
+
 
     def test_unsuccessful_change_email_user(self):
         dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
@@ -44,7 +46,6 @@ class TestChangeEmail:
         account = DMApiAccount(configuration=dm_api_configuration)
         mailhog = MailhogApi(configuration=mailhog_configuration)
         account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
-
 
         random_number = random.randint(4001, 5000)
         login = f'aanastya{random_number}'
@@ -56,3 +57,4 @@ class TestChangeEmail:
         account_helper.user_login(login, password)
         response = account_helper.change_email_user(login, password, new_email)
         assert response.status_code == 400, f'Успешное изменение email на невалидный{response.text}'
+
