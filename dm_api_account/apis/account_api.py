@@ -22,8 +22,33 @@ class AccountApi(RestClient):
         :return:
         """
         response = self.get(
-            path=f'/v1/account',
+            path=f'/v1/account/password',
             **kwargs)
+        return response
+
+    def put_v1_account_password(self,json_data):
+        """
+        PUT/v1/account/password
+        Change registered user password
+        :param :
+        :return:
+        """
+        response = self.put(
+            path=f'/v1/account/password',
+            json=json_data)
+        return response
+
+
+    def post_v1_account_password(self,json_data):
+        """
+        POST/v1/account/password
+        Reset registered user password
+        :param :
+        :return:
+        """
+        response = self.post(
+            path=f'/v1/account/password',
+            json=json_data)
         return response
 
     def put_v1_account_token(self, token):
@@ -37,6 +62,8 @@ class AccountApi(RestClient):
             path=f'/v1/account/{token}')
         return response
 
+
+
     def put_v1_account_email(self, json_data):
         """
         PUT/v1/account/email
@@ -46,5 +73,27 @@ class AccountApi(RestClient):
         response = self.put(
             path=f'/v1/account/email',
             json=json_data
+        )
+        return response
+
+    def delete_v1_account_login(self):
+        """
+        DELETE/v1/account/login
+        Logout as current user
+        :return:
+        """
+        response = self.delete(
+            path=f'/v1/account/login'
+        )
+        return response
+
+    def delete_v1_account_login_all(self):
+        """
+        DELETE/v1/account/login/all
+        Logout from every device
+        :return:
+        """
+        response = self.delete(
+            path=f'/v1/account/login/all'
         )
         return response
