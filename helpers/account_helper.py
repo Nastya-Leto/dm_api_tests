@@ -1,6 +1,11 @@
 import time
 from json import loads
 
+from dm_api_account.models.change_email import ChangeEmail
+from dm_api_account.models.change_password import ChangePassword
+from dm_api_account.models.login_credentials import LoginCredentials
+from dm_api_account.models.registration import Registration
+from dm_api_account.models.reset_password import ResetPassword
 from services.dm_api_account import DMApiAccount
 from services.api_mailhog import MailhogApi
 from retrying import retry
@@ -28,28 +33,26 @@ def retrier(function):
     return wrapper
 
 
-
 class AccountHelper:
     def __init__(self, dm_account_api: DMApiAccount, mailhog: MailhogApi):
         self.dm_account_api = dm_account_api
         self.mailhog = mailhog
 
     def auth_client(self, login: str, password: str):
-        response = self.dm_account_api.login_api.post_v1_account_login(json_data={"login": login, 'password': password})
+        response = self.user_login(login, password)
         token = {
             "x-dm-auth-token": response.headers['x-dm-auth-token']
         }
         self.dm_account_api.account_api.set_headers(token)
         self.dm_account_api.login_api.set_headers(token)
 
-
     def creating_new_user(self, login: str, password: str, email: str):
-        json_data = {
-            'login': login,
-            'email': email,
-            'password': password,
-        }
-        response = self.dm_account_api.account_api.post_v1_account(json_data=json_data)
+        registration = Registration(
+            login=login,
+            email=email,
+            password=password,
+        )
+        response = self.dm_account_api.account_api.post_v1_account(registration=registration)
         return response
 
     def activation_user(self, token):
@@ -67,60 +70,65 @@ class AccountHelper:
         return response
 
     def user_login(self, login, password, remember_me: bool = True):
+        login_credentials = LoginCredentials(
+            login=login,
+            password=password,
+            rememberMe=remember_me,
+        )
+        response = self.dm_account_api.login_api.post_v1_account_login(login_credentials)
 
-        json_data = {
-            'login': login,
-            'password': password,
-            'rememberMe': remember_me,
-        }
-
-        response = self.dm_account_api.login_api.post_v1_account_login(json_data)
         return response
 
+
     def change_email_user(self, login, password, new_email):
-        json_data = {
-            "login": login,
-            "password": password,
-            "email": new_email
-        }
-        response = self.dm_account_api.account_api.put_v1_account_email(json_data=json_data)
+        change_email = ChangeEmail(
+            login=login,
+            password=password,
+            email=new_email)
+        response = self.dm_account_api.account_api.put_v1_account_email(change_email)
         return response
 
 
     def reset_password(self, login, email):
-        json_data = {
-            "login": login,
-            "email": email
-        }
-        self.dm_account_api.account_api.post_v1_account_password(json_data=json_data)
+        reset_password = ResetPassword(
+            login=login,
+            email=email
+        )
+        self.dm_account_api.account_api.post_v1_account_password(reset_password)
 
-    def change_password(self, login, email, password,new_password):
 
+    def change_password(self, login, email, password, new_password):
         self.reset_password(login, email)
         token = self.get_token_reset(login)
-        self.auth_client(login,password)
+        self.auth_client(login, password)
 
-        json_data = {
-            "login": login,
-            "token": token,
-            "oldPassword": password,
-            "newPassword": new_password
-        }
-        response = self.dm_account_api.account_api.put_v1_account_password(json_data)
+        change_password = ChangePassword(
+            login=login,
+            token=token,
+            oldPassword=password,
+            newPassword=new_password
+        )
+        response = self.dm_account_api.account_api.put_v1_account_password(change_password)
         return response
+
 
     def logout_current_user(self):
         response = self.dm_account_api.account_api.delete_v1_account_login()
         return response
 
+
     def logout_all(self):
         response = self.dm_account_api.account_api.delete_v1_account_login_all()
         return response
 
+
     @retry(stop_max_attempt_number=5, retry_on_result=retry_if_result_none, wait_fixed=1000)
     def get_activation_token_by_login(self, login):
         token = None
+        start_time = time.time()
         response = self.mailhog.mailhog_api.get_message_from_mail()
+        end_time = time.time()
+        assert end_time - start_time < 3, f'Превышено время выполнения запроса'
         resp_js = response.json()
         for item in resp_js['items']:
             user_data = loads(item['Content']['Body'])
@@ -129,6 +137,7 @@ class AccountHelper:
                 token = user_data['ConfirmationLinkUrl'].split('/')[-1]
                 assert token is not None, 'Токен отсутствует'
         return token
+
 
     @retrier
     def get_new_activation_token(self, new_email):
@@ -143,11 +152,11 @@ class AccountHelper:
                 new_token = new_body['ConfirmationLinkUrl'].split('/')[-1]
                 return new_token
 
-    def get_token_reset(self,login):
+
+    def get_token_reset(self, login):
         token = None
         response = self.mailhog.mailhog_api.get_message_from_mail()
         resp_js = response.json()
-        #pprint(resp_js)
         for item in resp_js['items']:
             user_data = loads(item['Content']['Body'])
             user_login = user_data['Login']

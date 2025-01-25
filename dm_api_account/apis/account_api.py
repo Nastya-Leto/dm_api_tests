@@ -1,18 +1,22 @@
+from dm_api_account.models.change_email import ChangeEmail
+from dm_api_account.models.change_password import ChangePassword
+from dm_api_account.models.registration import Registration
+from dm_api_account.models.reset_password import ResetPassword
 from restclient.client import RestClient
 
 
 class AccountApi(RestClient):
 
-    def post_v1_account(self, json_data):
+    def post_v1_account(self, registration: Registration):
         """
         POST/v1/account
         Register new user
-        :param json_data:
+        :param:
         :return:
         """
         response = self.post(
             path=f'/v1/account',
-            json=json_data)
+            json=registration.model_dump(exclude_none=True, by_alias=True))
         return response
 
     def get_v1_account(self, **kwargs):
@@ -26,7 +30,7 @@ class AccountApi(RestClient):
             **kwargs)
         return response
 
-    def put_v1_account_password(self, json_data):
+    def put_v1_account_password(self, change_password: ChangePassword):
         """
         PUT/v1/account/password
         Change registered user password
@@ -35,10 +39,10 @@ class AccountApi(RestClient):
         """
         response = self.put(
             path=f'/v1/account/password',
-            json=json_data)
+            json=change_password.model_dump(exclude_none=True, by_alias=True))
         return response
 
-    def post_v1_account_password(self, json_data):
+    def post_v1_account_password(self, reset_password: ResetPassword):
         """
         POST/v1/account/password
         Reset registered user password
@@ -47,7 +51,7 @@ class AccountApi(RestClient):
         """
         response = self.post(
             path=f'/v1/account/password',
-            json=json_data)
+            json=reset_password.model_dump(exclude_none=True, by_alias=True))
         return response
 
     def put_v1_account_token(self, token):
@@ -61,7 +65,7 @@ class AccountApi(RestClient):
             path=f'/v1/account/{token}')
         return response
 
-    def put_v1_account_email(self, json_data):
+    def put_v1_account_email(self, change_email: ChangeEmail):
         """
         PUT/v1/account/email
         Change registered user email
@@ -69,7 +73,7 @@ class AccountApi(RestClient):
         """
         response = self.put(
             path=f'/v1/account/email',
-            json=json_data
+            json=change_email.model_dump(exclude_none=True, by_alias=True)
         )
         return response
 

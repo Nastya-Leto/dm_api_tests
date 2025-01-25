@@ -10,6 +10,7 @@ class TestLoginUser:
         assert response.status_code == 200, f'Пользователь не был создан{response.text}'
 
         response = account_helper.user_login(login, password)
+        assert response.headers['x-dm-auth-token'], f'Токен для пользователя не был получен'
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
 
