@@ -2,7 +2,7 @@ from restclient.client import RestClient
 
 
 class AccountApi(RestClient):
-main
+
     def post_v1_account(self, json_data):
         """
         POST/v1/account
@@ -26,7 +26,7 @@ main
             **kwargs)
         return response
 
-    def put_v1_account_password(self,json_data):
+    def put_v1_account_password(self, json_data):
         """
         PUT/v1/account/password
         Change registered user password
@@ -38,8 +38,7 @@ main
             json=json_data)
         return response
 
-
-    def post_v1_account_password(self,json_data):
+    def post_v1_account_password(self, json_data):
         """
         POST/v1/account/password
         Reset registered user password
@@ -61,8 +60,6 @@ main
         response = self.put(
             path=f'/v1/account/{token}')
         return response
-
-
 
     def put_v1_account_email(self, json_data):
         """
