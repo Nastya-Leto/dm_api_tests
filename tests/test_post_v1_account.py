@@ -11,6 +11,7 @@ class TestCreateUser:
         password = prepare_user.password
         email = prepare_user.email
 
+
         response = account_helper.register_new_user(login, password, email)
         assert response.status_code == 200, f'Пользователь не был создан{response.text}'
 

@@ -2,7 +2,7 @@ from restclient.client import RestClient
 
 
 class AccountApi(RestClient):
-
+main
     def post_v1_account(self, json_data):
         """
         POST/v1/account
