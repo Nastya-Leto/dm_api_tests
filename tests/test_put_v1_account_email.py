@@ -1,10 +1,3 @@
-
-from helpers.account_helper import AccountHelper
-from restclient.configuration import Configuration as MailhogConfiguration
-from restclient.configuration import Configuration as DmApiConfiguration
-from services.api_mailhog import MailhogApi
-from services.dm_api_account import DMApiAccount
-import random
 import structlog
 
 structlog.configure(
@@ -13,18 +6,11 @@ structlog.configure(
 
 
 class TestChangeEmail:
-    def test_successful_change_email_user(self):
-        dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
-        mailhog_configuration = MailhogConfiguration(host='http://5.63.153.31:5025')
-        account = DMApiAccount(configuration=dm_api_configuration)
-        mailhog = MailhogApi(configuration=mailhog_configuration)
-        account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
+    def test_successful_change_email_user(self, account_helper, prepare_user):
+        login = prepare_user.login
+        password = prepare_user.password
+        email = prepare_user.email
 
-
-        random_number = random.randint(3001, 4000)
-        login = f'aanastya{random_number}'
-        email = f'{login}@mail.ru'
-        password = '123456789'
         new_email = f'{login}New@mail.ru'
 
         account_helper.register_new_user(login, password, email)
@@ -40,17 +26,11 @@ class TestChangeEmail:
         assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
 
 
-    def test_unsuccessful_change_email_user(self):
-        dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051')
-        mailhog_configuration = MailhogConfiguration(host='http://5.63.153.31:5025')
-        account = DMApiAccount(configuration=dm_api_configuration)
-        mailhog = MailhogApi(configuration=mailhog_configuration)
-        account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
+    def test_unsuccessful_change_email_user(self, account_helper, prepare_user):
 
-        random_number = random.randint(4001, 5000)
-        login = f'aanastya{random_number}'
-        email = f'{login}@mail.ru'
-        password = '123456789'
+        login = prepare_user.login
+        password = prepare_user.password
+        email = prepare_user.email
         new_email = f'{login}New.ru'
 
         account_helper.register_new_user(login, password, email)
