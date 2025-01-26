@@ -4,3 +4,4 @@ structlog
 curlify
 retrying
 pydantic
+pyhamcrest
