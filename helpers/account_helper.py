@@ -55,8 +55,9 @@ class AccountHelper:
         response = self.dm_account_api.account_api.post_v1_account(registration=registration)
         return response
 
-    def activation_user(self, token):
-        response = self.dm_account_api.account_api.put_v1_account_token(token=token)
+    def activation_user(self, token, validate_response=False):
+        response = self.dm_account_api.account_api.put_v1_account_token(token=token,
+                                                                        validate_response=validate_response)
         return response
 
     def register_new_user(self, login: str, password: str, email: str, with_activate: bool = True):
@@ -69,25 +70,26 @@ class AccountHelper:
             response = self.activation_user(token)
         return response
 
-    def user_login(self, login, password, remember_me: bool = True):
+    def user_login(self, login, password, remember_me: bool = True, validate_response=False):
         login_credentials = LoginCredentials(
             login=login,
             password=password,
             rememberMe=remember_me,
+
         )
-        response = self.dm_account_api.login_api.post_v1_account_login(login_credentials)
+        response = self.dm_account_api.login_api.post_v1_account_login(login_credentials,
+                                                                       validate_response=validate_response)
 
         return response
 
-
-    def change_email_user(self, login, password, new_email):
+    def change_email_user(self, login, password, new_email, validate_response=True):
         change_email = ChangeEmail(
             login=login,
             password=password,
             email=new_email)
-        response = self.dm_account_api.account_api.put_v1_account_email(change_email)
+        response = self.dm_account_api.account_api.put_v1_account_email(change_email,
+                                                                        validate_response=validate_response)
         return response
-
 
     def reset_password(self, login, email):
         reset_password = ResetPassword(
@@ -95,7 +97,6 @@ class AccountHelper:
             email=email
         )
         self.dm_account_api.account_api.post_v1_account_password(reset_password)
-
 
     def change_password(self, login, email, password, new_password):
         self.reset_password(login, email)
@@ -111,16 +112,13 @@ class AccountHelper:
         response = self.dm_account_api.account_api.put_v1_account_password(change_password)
         return response
 
-
     def logout_current_user(self):
         response = self.dm_account_api.account_api.delete_v1_account_login()
         return response
 
-
     def logout_all(self):
         response = self.dm_account_api.account_api.delete_v1_account_login_all()
         return response
-
 
     @retry(stop_max_attempt_number=5, retry_on_result=retry_if_result_none, wait_fixed=1000)
     def get_activation_token_by_login(self, login):
@@ -138,7 +136,6 @@ class AccountHelper:
                 assert token is not None, 'Токен отсутствует'
         return token
 
-
     @retrier
     def get_new_activation_token(self, new_email):
         new_token = None
@@ -151,7 +148,6 @@ class AccountHelper:
                 new_body = loads(item['Content']['Body'])
                 new_token = new_body['ConfirmationLinkUrl'].split('/')[-1]
                 return new_token
-
 
     def get_token_reset(self, login):
         token = None

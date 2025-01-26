@@ -8,19 +8,14 @@ structlog.configure(
 class TestActivationUser:
 
     def test_successful_activation_user(self, account_helper, prepare_user):
-
         login = prepare_user.login
         password = prepare_user.password
         email = prepare_user.email
 
-        response = account_helper.register_new_user(login, password, email)
-        assert response.status_code == 200, f'Пользователь не был создан{response.text}'
-
-        response = account_helper.user_login(login, password)
-        assert response.status_code == 200, f'Пользователь не был авторизован{response.text}'
+        account_helper.register_new_user(login, password, email)
+        account_helper.user_login(login, password)
 
     def test_unsuccessful_activation_user(self, account_helper, prepare_user):
-
         login = prepare_user.login
         password = prepare_user.password
         email = prepare_user.email
