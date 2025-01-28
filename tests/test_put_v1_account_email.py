@@ -30,8 +30,10 @@ class TestChangeEmail:
         password = prepare_user.password
         email = prepare_user.email
         new_email = f'{login}New.ru'
+        message = {'Email': ['Invalid']}
 
         account_helper.register_new_user(login, password, email)
         account_helper.user_login(login, password)
-        with check_status_kode_http(expected_status_kode=400, expected_message='Validation failed'):
+        with check_status_kode_http(expected_status_kode=400, expected_message='Validation failed',
+                                    expected_errors_message=message):
             account_helper.change_email_user(login, password, new_email, validate_response=False)
