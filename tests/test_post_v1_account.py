@@ -2,7 +2,6 @@ import structlog
 import pytest
 
 from chekers.http_chekers import check_status_kode_http
-from conftest import prepare_user
 
 structlog.configure(
     processors=[
