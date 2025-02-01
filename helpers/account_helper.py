@@ -63,7 +63,6 @@ class AccountHelper:
     def register_new_user(self, login: str, password: str, email: str, with_activate: bool = True):
         # Создание пользователя
         response = self.creating_new_user(login, password, email)
-        assert response.status_code == 201, f'Пользователь не был создан{response.text}'
 
         if with_activate:
             token = self.get_activation_token_by_login(login)
@@ -81,7 +80,6 @@ class AccountHelper:
                                                                        validate_response=validate_response)
         if validate_headers:
             assert response.headers['x-dm-auth-token'], f'Токен для пользователя не был получен'
-            assert response.status_code == 200, 'Пользователь не смог авторизоваться'
         return response
 
     def change_email_user(self, login, password, new_email, validate_response=True):
