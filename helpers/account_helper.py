@@ -70,7 +70,7 @@ class AccountHelper:
             response = self.activation_user(token)
         return response
 
-    def user_login(self, login, password, remember_me: bool = True, validate_response=False):
+    def user_login(self, login, password, remember_me: bool = True, validate_response=False, validate_headers=False):
         login_credentials = LoginCredentials(
             login=login,
             password=password,
@@ -79,7 +79,9 @@ class AccountHelper:
         )
         response = self.dm_account_api.login_api.post_v1_account_login(login_credentials,
                                                                        validate_response=validate_response)
-
+        if validate_headers:
+            assert response.headers['x-dm-auth-token'], f'Токен для пользователя не был получен'
+            assert response.status_code == 200, 'Пользователь не смог авторизоваться'
         return response
 
     def change_email_user(self, login, password, new_email, validate_response=True):
