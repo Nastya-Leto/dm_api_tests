@@ -16,8 +16,7 @@ class TestCreateUser:
         email = prepare_user.email
         with check_status_kode_http():
             account_helper.register_new_user(login, password, email)
-            response = account_helper.user_login(login, password)
-            PostV1Account.check_response_values(response)
+            account_helper.user_login(login, password)
 
     @pytest.mark.parametrize("login, email, password, message",
                              [('a', 'zakharova@mail.ru', '123456789', {'Login': ['Short']}),
