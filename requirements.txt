@@ -3,3 +3,4 @@ pytest
 structlog
 curlify
 retrying
+pydantic
