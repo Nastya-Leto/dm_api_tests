@@ -1,22 +1,11 @@
-from datetime import datetime
-from hamcrest import assert_that, has_property, starts_with, all_of, instance_of, has_properties, equal_to
-
+from chekers.get_v1_account import GetV1Account
 from chekers.http_chekers import check_status_kode_http
 
 
 def test_get_v1_account_auth(auth_account_helper):
     with check_status_kode_http():
         response = auth_account_helper.dm_account_api.account_api.get_v1_account()
-
-        assert_that(response, all_of(
-            has_property('resource', has_property('login', starts_with('aazakharova'))),
-            has_property('resource', has_property('registration', instance_of(datetime))),
-            has_property('resource', has_properties('rating', has_properties({
-                "enabled": equal_to(True),
-                "quality": equal_to(0),
-                "quantity": equal_to(0)
-            }))
-                         )))
+        GetV1Account.check_response_value(response)
 
 
 def test_get_v1_account_not_auth(account_helper):

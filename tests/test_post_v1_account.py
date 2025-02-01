@@ -2,6 +2,7 @@ import structlog
 import pytest
 
 from chekers.http_chekers import check_status_kode_http
+from chekers.post_v1_account import PostV1Account
 
 structlog.configure(
     processors=[
@@ -15,7 +16,8 @@ class TestCreateUser:
         email = prepare_user.email
         with check_status_kode_http():
             account_helper.register_new_user(login, password, email)
-            account_helper.user_login(login, password)
+            response = account_helper.user_login(login, password)
+            PostV1Account.check_response_values(response)
 
     @pytest.mark.parametrize("login, email, password, message",
                              [('a', 'zakharova@mail.ru', '123456789', {'Login': ['Short']}),
