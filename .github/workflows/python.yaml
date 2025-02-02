@@ -56,7 +56,7 @@ jobs:
           path: _site
           retention-days: 1
 
-  publich-report:
+  publish-report:
     runs-on: ubuntu-latest
     needs: generate-report
     name: Publish report
@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v4
       - name: Upload allure report
         uses: actions/upload-pages-artifact@v3
-      - name: Deploy to GitHub Pages
+      - name: _site
         id: deployment
         uses: actions/deploy-pages@v1.2.9
 
