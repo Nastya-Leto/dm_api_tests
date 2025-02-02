@@ -26,7 +26,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest ./tests --alluredir=../allure-results --disable-warnings
+          pytest ./tests --alluredir=/allure-results --disable-warnings
         continue-on-error: true
 
       - name: Archive allure results
@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v4
       - name: Upload allure report
         uses: actions/upload-pages-artifact@v3
-      - name: _site
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1.2.9
         #14/59
