@@ -76,5 +76,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        #14/59
-
+      - run: echo "https://nastya-leto.github.io/dm_api_tests/"
