@@ -18,6 +18,7 @@ run_tests:
     when: always
     paths:
       - ./allure-results
+      - ./swagger-coverage-output
 
 allure:
   stage: reports
