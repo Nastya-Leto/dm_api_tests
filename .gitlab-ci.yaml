@@ -1,6 +1,7 @@
 stages:
   - testing
   - reports
+  - coverage
 
 run_tests:
   stage: testing
@@ -48,7 +49,7 @@ pages:
 coverage:
   stage: coverage
   tags:
-    - docker
+    - my_docker
   image: adoptopenjdk/openjdk11
   before_script:
     - apt-get update && apt-get install -y wget unzip
