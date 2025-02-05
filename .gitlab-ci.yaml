@@ -1,5 +1,6 @@
 stages:
   - testing
+  - reports
 
 run_tests:
   stage: testing
@@ -10,5 +11,36 @@ run_tests:
     - pip install --upgrade pip
     - pip install -r requirements.txt
   script:
-    - pytest
+    - pytest --allure=./allure-results tests
   allow_failure: true
+  artifacts:
+    when: always
+    paths:
+      - ./allure-results
+
+allure:
+  stage: reports
+  tags:
+    - my_docker
+  image: frankescobar/allure-docker-service
+  script:
+    - allure generate -c ./allure-results -o ./allure-report
+  artifacts:
+    paths:
+      - ./allure-results
+      - ./allure-report
+    expire_in: 1 days
+  rules:
+    - when: always
+
+pages:
+  stage: reports
+  needs: ["allure"]
+  script:
+    - mkdir public
+    - mv ./allure-report/* public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - when: always
