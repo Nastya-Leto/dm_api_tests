@@ -51,7 +51,7 @@ coverage:
     - docker
   image: adoptopenjdk/openjdk11
   before_script:
-    - apt-get update $$ aptget install -y wget unzip
+    - apt-get update && apt-get install -y wget unzip
     - wget https://github.com/viclovsky/swagger-coverage/releases/download/1.5.0/swagger-coverage-1.5.0.zip
     - unzip swagger-coverage-commandline-1.5.0.zip
   script:
