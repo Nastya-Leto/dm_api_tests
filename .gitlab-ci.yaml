@@ -11,7 +11,7 @@ run_tests:
     - pip install --upgrade pip
     - pip install -r requirements.txt
   script:
-    - pytest --allure=./allure-results tests
+    - pytest --alluredir=./allure-results tests
   allow_failure: true
   artifacts:
     when: always
