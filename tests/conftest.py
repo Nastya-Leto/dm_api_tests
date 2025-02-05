@@ -26,7 +26,7 @@ def mailhog_api():
 
 @pytest.fixture(scope="session")
 def account_api():
-    dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051',disable_log=False)
+    dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051', disable_log=False)
     account = DMApiAccount(configuration=dm_api_configuration)
     return account
 
@@ -36,13 +36,15 @@ def account_helper(mailhog_api, account_api):
     account_helper = AccountHelper(dm_account_api=account_api, mailhog=mailhog_api)
     return account_helper
 
+
 @pytest.fixture(scope="function")
 def auth_account_helper(mailhog_api):
-    dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051',disable_log=False)
+    dm_api_configuration = DmApiConfiguration(host='http://5.63.153.31:5051', disable_log=False)
     account = DMApiAccount(configuration=dm_api_configuration)
     account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog_api)
-    account_helper.auth_client(login="aazakharova17",password='123456789')
+    account_helper.auth_client(login="aazakharova17", password='123456789')
     return account_helper
+
 
 @pytest.fixture()
 def prepare_user():
@@ -52,7 +54,7 @@ def prepare_user():
     login = f'aanastya{data}+{random_number}'
     email = f'{login}@mail.ru'
     password = '123456789'
-    new_password = str(random.randint(111111111,999999999))
-    User = namedtuple('User',['login','password','email',"new_password"])
-    user = User(login=login,password=password,email=email,new_password=new_password)
+    new_password = str(random.randint(111111111, 999999999))
+    User = namedtuple('User', ['login', 'password', 'email', "new_password"])
+    user = User(login=login, password=password, email=email, new_password=new_password)
     return user
