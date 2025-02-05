@@ -1,13 +1,14 @@
 stages:
-     - testing
+  - testing
+
 run_tests:
-    stage: testing
-    tags: 
+  stage: testing
+  tags:
     - my_docker
-    image: python:3.10-slim
-    before_script:
-        - pip install --upgrade pip
-        - pip install -r requirements.txt
-    script:
-        - pytest
-    allow_failure: true 
+  image: python:3.10-slim
+  before_script:
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - pytest
+  allow_failure: true
