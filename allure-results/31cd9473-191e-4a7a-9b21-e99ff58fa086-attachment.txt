@@ -1,0 +1,34 @@
+{
+    "data": null,
+    "evend_id": "53854343-1f65-43ba-9faf-a8f965e4b799",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": {
+        "email": "zakharova@mail.ru",
+        "login": "a",
+        "password": "123456789"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 69' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "a", "password": "123456789", "email": "zakharova@mail.ru"}' http://5.63.153.31:5051/v1/account
+{
+    "evend_id": "53854343-1f65-43ba-9faf-a8f965e4b799",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:47 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "errors": {
+            "Login": [
+                "Short"
+            ]
+        },
+        "status": 400,
+        "title": "Validation failed",
+        "traceId": "00-07871e85cd9c4dfb3eb5c4b2b4faf138-6e8c1745cea74ce2-01",
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+    },
+    "service": "api",
+    "status_code": 400
+}

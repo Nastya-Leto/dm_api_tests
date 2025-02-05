@@ -1,0 +1,71 @@
+{
+    "total": 551,
+    "count": 1,
+    "start": 0,
+    "items": [
+        {
+            "ID": "3k64Ps2QgU877IFFiM0z9-4L_vnkCCDoqz-9-RW6ejE=@mailhog.example",
+            "From": {
+                "Relays": null,
+                "Mailbox": "info",
+                "Domain": "dm.am",
+                "Params": ""
+            },
+            "To": [
+                {
+                    "Relays": null,
+                    "Mailbox": "aanastya02_02_2025_15_19_49+5916",
+                    "Domain": "mail.ru",
+                    "Params": ""
+                }
+            ],
+            "Content": {
+                "Headers": {
+                    "Content-Type": [
+                        "text/html; charset=utf-8"
+                    ],
+                    "Date": [
+                        "Sun, 02 Feb 2025 11:19:49 +0000"
+                    ],
+                    "From": [
+                        "\"DM.am\" <info@dm.am>"
+                    ],
+                    "MIME-Version": [
+                        "1.0"
+                    ],
+                    "Message-Id": [
+                        "<b5436f63-9890-48ee-9c7c-5332024d5c8a>"
+                    ],
+                    "Received": [
+                        "from f4a7a8733faa by mailhog.example (MailHog)\r\n          id 3k64Ps2QgU877IFFiM0z9-4L_vnkCCDoqz-9-RW6ejE=@mailhog.example; Sun, 02 Feb 2025 11:19:49 +0000"
+                    ],
+                    "Reply-To": [
+                        "\"DM.am\" <test@dm.am>"
+                    ],
+                    "Return-Path": [
+                        "<info@dm.am>"
+                    ],
+                    "Subject": [
+                        "=?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YHQsdGA0L7RgdCw?= =?utf-8?b?INC/0LDRgNC+0LvRjyDQvdCwIERNLkFNINC00LvRjw==?= aanastya02_02_2025_15_19_49+5916"
+                    ],
+                    "To": [
+                        "aanastya02_02_2025_15_19_49+5916@mail.ru"
+                    ]
+                },
+                "Body": "{\"Login\":\"aanastya02_02_2025_15_19_49\\u002B5916\",\"ConfirmationLinkUri\":\"http://localhost:5050/password/d6249de1-5c36-48ee-8f0e-f3b6d1bc0934\"}",
+                "Size": 568,
+                "MIME": null
+            },
+            "Created": "2025-02-02T11:19:49.860856563Z",
+            "MIME": null,
+            "Raw": {
+                "From": "info@dm.am",
+                "To": [
+                    "aanastya02_02_2025_15_19_49+5916@mail.ru"
+                ],
+                "Data": "From: \"DM.am\" <info@dm.am>\r\nDate: Sun, 02 Feb 2025 11:19:49 +0000\r\nSubject: =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YHQsdGA0L7RgdCw?=\r\n =?utf-8?b?INC/0LDRgNC+0LvRjyDQvdCwIERNLkFNINC00LvRjw==?=\r\n aanastya02_02_2025_15_19_49+5916\r\nMessage-Id: <b5436f63-9890-48ee-9c7c-5332024d5c8a>\r\nReply-To: \"DM.am\" <test@dm.am>\r\nTo: aanastya02_02_2025_15_19_49+5916@mail.ru\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=utf-8\r\n\r\n{\"Login\":\"aanastya02_02_2025_15_19_49\\u002B5916\",\"ConfirmationLinkUri\":\"http://localhost:5050/password/d6249de1-5c36-48ee-8f0e-f3b6d1bc0934\"}",
+                "Helo": "f4a7a8733faa"
+            }
+        }
+    ]
+}

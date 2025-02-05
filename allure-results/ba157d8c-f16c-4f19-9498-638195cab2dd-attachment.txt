@@ -1,0 +1,25 @@
+{
+    "data": null,
+    "evend_id": "f64de896-0c84-4217-83f1-ef3f0e234a50",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": null,
+    "method": "GET",
+    "params": null,
+    "service": "api"
+}
+curl -X GET -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'User-Agent: python-requests/2.32.3' http://5.63.153.31:5051/v1/account
+{
+    "evend_id": "f64de896-0c84-4217-83f1-ef3f0e234a50",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:45 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "status": 401,
+        "title": "User must be authenticated",
+        "traceId": "00-d0ca93c152d00cd490c6b8ad4c5b4e7a-74d1b374407c7cef-01",
+        "type": "https://tools.ietf.org/html/rfc7235#section-3.1"
+    },
+    "service": "api",
+    "status_code": 401
+}

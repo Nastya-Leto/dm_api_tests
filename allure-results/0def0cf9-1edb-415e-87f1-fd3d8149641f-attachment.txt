@@ -1,0 +1,53 @@
+{
+    "data": null,
+    "evend_id": "85d38255-7d84-4928-9336-b6c82b5bd445",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": {
+        "email": "aanastya02_02_2025_15_19_48+5346@mail.ru",
+        "login": "aanastya02_02_2025_15_19_48+5346",
+        "password": "123456789"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 123' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "aanastya02_02_2025_15_19_48+5346", "password": "123456789", "email": "aanastya02_02_2025_15_19_48+5346@mail.ru"}' http://5.63.153.31:5051/v1/account
+{
+    "evend_id": "85d38255-7d84-4928-9336-b6c82b5bd445",
+    "event": "Response",
+    "headers": "{'Content-Length': '0', 'Date': 'Sun, 02 Feb 2025 11:19:47 GMT', 'Server': 'Kestrel', 'Location': 'http://5.63.153.31:5051/v1/users/aanastya02_02_2025_15_19_48%2B5346'}",
+    "json": {},
+    "service": "api",
+    "status_code": 201
+}
+{
+    "data": null,
+    "evend_id": "a3faef38-c2e8-4625-980e-f8818aa28796",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": {
+        "login": "aanastya02_02_2025_15_19_48+5346",
+        "password": "123456789",
+        "rememberMe": true
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 90' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "aanastya02_02_2025_15_19_48+5346", "password": "123456789", "rememberMe": true}' http://5.63.153.31:5051/v1/account/login
+{
+    "evend_id": "a3faef38-c2e8-4625-980e-f8818aa28796",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:47 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "status": 403,
+        "title": "User is inactive. Address the technical support for more details",
+        "traceId": "00-0fac633e29c6b975ca5828ff9bd1ecd0-467f7dad2e352bec-01",
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.3"
+    },
+    "service": "api",
+    "status_code": 403
+}

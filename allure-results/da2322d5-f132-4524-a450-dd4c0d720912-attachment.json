@@ -1,0 +1,27 @@
+{
+    "resource": {
+        "info": "",
+        "settings": {
+            "colorSchema": "Modern",
+            "paging": {
+                "postsPerPage": 10,
+                "commentsPerPage": 10,
+                "topicsPerPage": 10,
+                "messagesPerPage": 10,
+                "entitiesPerPage": 10
+            }
+        },
+        "login": "aazakharova17",
+        "roles": [
+            "Guest",
+            "Player"
+        ],
+        "rating": {
+            "enabled": true,
+            "quality": 0,
+            "quantity": 0
+        },
+        "online": "2025-02-02T11:19:44.696595+00:00",
+        "registration": "2025-01-23T16:40:31.220473+00:00"
+    }
+}

@@ -1,0 +1,1 @@
+curl -X GET -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'User-Agent: python-requests/2.32.3' -H 'x-dm-auth-token: IQJh+zgzF5DS7XKsOU9Bm0sfgaqCiUWpOfVJnMPM6TnTRML7Gm9ddJ4rgmRR4lvgRGGauB1BMhkEKCxZTOU05YoDgHr3PmzZnT/0v8+4WUCMVWYHL1dNtBnQy2uYfrPzbT/DFjKYygs=' http://5.63.153.31:5051/v1/account

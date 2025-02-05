@@ -1,0 +1,54 @@
+{
+    "data": null,
+    "evend_id": "2dc520a0-f179-46a8-bec6-ce4728c948e3",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": {
+        "email": "aanastya02_02_2025_15_19_50+5404@mail.ru",
+        "login": "aanastya02_02_2025_15_19_50+5404",
+        "password": "123456789"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 123' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -H 'x-dm-auth-token: IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ=' -d '{"login": "aanastya02_02_2025_15_19_50+5404", "password": "123456789", "email": "aanastya02_02_2025_15_19_50+5404@mail.ru"}' http://5.63.153.31:5051/v1/account
+{
+    "evend_id": "2dc520a0-f179-46a8-bec6-ce4728c948e3",
+    "event": "Response",
+    "headers": "{'Content-Length': '0', 'Date': 'Sun, 02 Feb 2025 11:19:49 GMT', 'Server': 'Kestrel', 'Location': 'http://5.63.153.31:5051/v1/users/aanastya02_02_2025_15_19_50%2B5404', 'X-Dm-Auth-Token': 'IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ='}",
+    "json": {},
+    "service": "api",
+    "status_code": 201
+}
+{
+    "data": null,
+    "evend_id": "c3002095-4f9a-49c1-8e60-74e5f1838f11",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/None",
+    "headers": null,
+    "json": null,
+    "method": "PUT",
+    "params": null,
+    "service": "api"
+}
+curl -X PUT -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' -H 'x-dm-auth-token: IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ=' http://5.63.153.31:5051/v1/account/None
+{
+    "evend_id": "c3002095-4f9a-49c1-8e60-74e5f1838f11",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/problem+json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:49 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ='}",
+    "json": {
+        "errors": {
+            "token": [
+                "Invalid value for field token"
+            ]
+        },
+        "status": 400,
+        "title": "One or more validation errors occurred.",
+        "traceId": "00-4fa52ebcfa503048c414034aa722c0b8-a1056fe4c6c725b4-01",
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+    },
+    "service": "api",
+    "status_code": 400
+}

@@ -1,0 +1,1 @@
+curl -X DELETE -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' -H 'x-dm-auth-token: IQJh+zgzF5DS7XKsOU9Bm0sfgaqCiUWpOfVJnMPM6TnTRML7Gm9ddJ4rgmRR4lvgRGGauB1BMhnmZCWaGTPJ7yL3j/hhXTmWT53/o/0l+pbrqE2JWbyfusdrF70fywwK1vxCQ8UWImM=' http://5.63.153.31:5051/v1/account/login/all

@@ -1,0 +1,15 @@
+{
+    "resource": {
+        "login": "aanastya02_02_2025_15_19_48+5974",
+        "roles": [
+            "Guest",
+            "Player"
+        ],
+        "rating": {
+            "enabled": true,
+            "quality": 0,
+            "quantity": 0
+        },
+        "registration": "2025-02-02T11:19:49.194922+00:00"
+    }
+}

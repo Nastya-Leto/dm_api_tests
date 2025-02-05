@@ -1,0 +1,59 @@
+{
+    "data": null,
+    "evend_id": "3749b880-ed5d-4565-9f8a-b0337c06a638",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": {
+        "login": "aazakharova17",
+        "password": "123456789",
+        "rememberMe": true
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 71' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "aazakharova17", "password": "123456789", "rememberMe": true}' http://5.63.153.31:5051/v1/account/login
+{
+    "evend_id": "3749b880-ed5d-4565-9f8a-b0337c06a638",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:43 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5DS7XKsOU9Bm0sfgaqCiUWpOfVJnMPM6TnTRML7Gm9ddJ4rgmRR4lvgRGGauB1BMhnJyV8Zp5vDCgvKyXVUPb516ZPd4whOYVyvKojCh93Wiwu1/pLnAoHxe9k5Hq3nB1E='}",
+    "json": {
+        "resource": {
+            "login": "aazakharova17",
+            "online": "2025-02-02T11:13:52.75434+00:00",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "registration": "2025-01-23T16:40:31.220473+00:00",
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "evend_id": "9c7ab48a-0b79-4c9d-8b3c-a8058283b509",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": null,
+    "method": "DELETE",
+    "params": null,
+    "service": "api"
+}
+curl -X DELETE -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' -H 'x-dm-auth-token: IQJh+zgzF5DS7XKsOU9Bm0sfgaqCiUWpOfVJnMPM6TnTRML7Gm9ddJ4rgmRR4lvgRGGauB1BMhnJyV8Zp5vDCgvKyXVUPb516ZPd4whOYVyvKojCh93Wiwu1/pLnAoHxe9k5Hq3nB1E=' http://5.63.153.31:5051/v1/account/login
+{
+    "evend_id": "9c7ab48a-0b79-4c9d-8b3c-a8058283b509",
+    "event": "Response",
+    "headers": "{'Date': 'Sun, 02 Feb 2025 11:19:43 GMT', 'Server': 'Kestrel'}",
+    "json": {},
+    "service": "api",
+    "status_code": 204
+}

@@ -1,0 +1,251 @@
+{
+    "data": null,
+    "evend_id": "17d0d2df-56bf-4629-8f35-347aadf40926",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account",
+    "headers": null,
+    "json": {
+        "email": "aanastya02_02_2025_15_19_49+5916@mail.ru",
+        "login": "aanastya02_02_2025_15_19_49+5916",
+        "password": "123456789"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 123' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "aanastya02_02_2025_15_19_49+5916", "password": "123456789", "email": "aanastya02_02_2025_15_19_49+5916@mail.ru"}' http://5.63.153.31:5051/v1/account
+{
+    "evend_id": "17d0d2df-56bf-4629-8f35-347aadf40926",
+    "event": "Response",
+    "headers": "{'Content-Length': '0', 'Date': 'Sun, 02 Feb 2025 11:19:48 GMT', 'Server': 'Kestrel', 'Location': 'http://5.63.153.31:5051/v1/users/aanastya02_02_2025_15_19_49%2B5916'}",
+    "json": {},
+    "service": "api",
+    "status_code": 201
+}
+{
+    "data": null,
+    "evend_id": "6ef6b06f-01bc-47cb-80c1-fe870ebebc1b",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/d027315c-dcf9-4eb8-a1f5-3cbf4a3bc447",
+    "headers": null,
+    "json": null,
+    "method": "PUT",
+    "params": null,
+    "service": "api"
+}
+curl -X PUT -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 0' -H 'User-Agent: python-requests/2.32.3' http://5.63.153.31:5051/v1/account/d027315c-dcf9-4eb8-a1f5-3cbf4a3bc447
+{
+    "evend_id": "6ef6b06f-01bc-47cb-80c1-fe870ebebc1b",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:48 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "resource": {
+            "login": "aanastya02_02_2025_15_19_49+5916",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "evend_id": "f09db66f-a4ab-4881-8aff-dd4446fa413d",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": {
+        "login": "aanastya02_02_2025_15_19_49+5916",
+        "password": "123456789",
+        "rememberMe": true
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 90' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "aanastya02_02_2025_15_19_49+5916", "password": "123456789", "rememberMe": true}' http://5.63.153.31:5051/v1/account/login
+{
+    "evend_id": "f09db66f-a4ab-4881-8aff-dd4446fa413d",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:48 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIFCfkAjfLHOXGipzMqfKYlEN3R3Kk4CFJPUSg30g3o+fFYJxdPbNVl2qdo3kF0lp2s='}",
+    "json": {
+        "resource": {
+            "login": "aanastya02_02_2025_15_19_49+5916",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "registration": "2025-02-02T11:19:49.5725+00:00",
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "evend_id": "0a1318d2-7957-47b3-86d3-7b4a2b82d6e7",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/password",
+    "headers": null,
+    "json": {
+        "email": "aanastya02_02_2025_15_19_49+5916@mail.ru",
+        "login": "aanastya02_02_2025_15_19_49+5916"
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 98' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "aanastya02_02_2025_15_19_49+5916", "email": "aanastya02_02_2025_15_19_49+5916@mail.ru"}' http://5.63.153.31:5051/v1/account/password
+{
+    "evend_id": "0a1318d2-7957-47b3-86d3-7b4a2b82d6e7",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:49 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked'}",
+    "json": {
+        "metadata": {
+            "email": "aa..6@ma..u"
+        },
+        "resource": {
+            "login": "aanastya02_02_2025_15_19_49+5916",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "registration": "2025-02-02T11:19:49.5725+00:00",
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "evend_id": "3ecaae0a-b4e3-46a0-8271-5aa67edb0c32",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": {
+        "login": "aanastya02_02_2025_15_19_49+5916",
+        "password": "123456789",
+        "rememberMe": true
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 90' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"login": "aanastya02_02_2025_15_19_49+5916", "password": "123456789", "rememberMe": true}' http://5.63.153.31:5051/v1/account/login
+{
+    "evend_id": "3ecaae0a-b4e3-46a0-8271-5aa67edb0c32",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:49 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ='}",
+    "json": {
+        "resource": {
+            "login": "aanastya02_02_2025_15_19_49+5916",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "registration": "2025-02-02T11:19:49.5725+00:00",
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "evend_id": "7396f801-da67-4fc7-b965-278073b514f9",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/password",
+    "headers": null,
+    "json": {
+        "login": "aanastya02_02_2025_15_19_49+5916",
+        "newPassword": "836594042",
+        "oldPassword": "123456789",
+        "token": "d6249de1-5c36-48ee-8f0e-f3b6d1bc0934"
+    },
+    "method": "PUT",
+    "params": null,
+    "service": "api"
+}
+curl -X PUT -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 150' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -H 'x-dm-auth-token: IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ=' -d '{"login": "aanastya02_02_2025_15_19_49+5916", "token": "d6249de1-5c36-48ee-8f0e-f3b6d1bc0934", "oldPassword": "123456789", "newPassword": "836594042"}' http://5.63.153.31:5051/v1/account/password
+{
+    "evend_id": "7396f801-da67-4fc7-b965-278073b514f9",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:49 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ='}",
+    "json": {
+        "resource": {
+            "login": "aanastya02_02_2025_15_19_49+5916",
+            "online": "2025-02-02T11:19:50.003472+00:00",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
+{
+    "data": null,
+    "evend_id": "2d1f089e-586c-4458-9f0b-07f8c92b9f8b",
+    "event": "Request",
+    "full_url": "http://5.63.153.31:5051/v1/account/login",
+    "headers": null,
+    "json": {
+        "login": "aanastya02_02_2025_15_19_49+5916",
+        "password": "836594042",
+        "rememberMe": true
+    },
+    "method": "POST",
+    "params": null,
+    "service": "api"
+}
+curl -X POST -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'Content-Length: 90' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -H 'x-dm-auth-token: IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIHfkh/3FjVrf4anCsIHpfxxgCXLLq0qb0Xyfznw4ltUbg6L/eLmbUWSxUiWcpm0fJQ=' -d '{"login": "aanastya02_02_2025_15_19_49+5916", "password": "836594042", "rememberMe": true}' http://5.63.153.31:5051/v1/account/login
+{
+    "evend_id": "2d1f089e-586c-4458-9f0b-07f8c92b9f8b",
+    "event": "Response",
+    "headers": "{'Content-Type': 'application/json; charset=utf-8', 'Date': 'Sun, 02 Feb 2025 11:19:49 GMT', 'Server': 'Kestrel', 'Transfer-Encoding': 'chunked', 'X-Dm-Auth-Token': 'IQJh+zgzF5DsAssAu+lEFtzDErJlLkvLhIqAbxvTy0kI+YO92Bhm4t936BQdeK7s0pUu2ujHuIEcyMtUcsrJCB4Bq+QDL4KJVbbLwSyycaVkwkbMSVuZu3frfMmFh9wzHEsZdUkKHE8='}",
+    "json": {
+        "resource": {
+            "login": "aanastya02_02_2025_15_19_49+5916",
+            "online": "2025-02-02T11:19:50.003472+00:00",
+            "rating": {
+                "enabled": true,
+                "quality": 0,
+                "quantity": 0
+            },
+            "registration": "2025-02-02T11:19:49.5725+00:00",
+            "roles": [
+                "Guest",
+                "Player"
+            ]
+        }
+    },
+    "service": "api",
+    "status_code": 200
+}
