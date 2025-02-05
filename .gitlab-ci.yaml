@@ -64,3 +64,16 @@ coverage:
     paths:
       - ./swagger-coverage-report.html
     expire_in: 1 days
+
+send_coverage:
+  stage: coverage
+  needs: ["coverage"]
+  tags:
+    - my_docker
+  image: python:3.10-slim
+  before_script:
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - python -m packages.notifier.bot
+  allow_failure: true
