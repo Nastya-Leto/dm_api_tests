@@ -1,6 +1,9 @@
+import allure
+
 from chekers.http_chekers import check_status_kode_http
 
-
+@allure.suite('Тесты на проверку метода post_v1_account_password')
+@allure.title('Проверка успешной смены пароля пользователя')
 def test_put_v1_account_password(account_helper, prepare_user):
     login = prepare_user.login
     password = prepare_user.password

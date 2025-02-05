@@ -1,15 +1,17 @@
+import allure
 import structlog
 import pytest
 
 from chekers.http_chekers import check_status_kode_http
-from chekers.post_v1_account import PostV1Account
 
 structlog.configure(
     processors=[
         structlog.processors.JSONRenderer(indent=4, ensure_ascii=True, sort_keys=True)])
 
-
+@allure.suite('Тесты на проверку метода post_v1_account')
+@allure.sub_suite('Проверка  создания пользователя')
 class TestCreateUser:
+    @allure.title('Проверка успешного создания пользователя')
     def test_successful_creation_user(self, account_helper, prepare_user):
         login = prepare_user.login
         password = prepare_user.password
@@ -18,6 +20,7 @@ class TestCreateUser:
             account_helper.register_new_user(login, password, email)
             account_helper.user_login(login, password)
 
+    @allure.title('Проверка невозможности создания пользователя с невалидными данными')
     @pytest.mark.parametrize("login, email, password, message",
                              [('a', 'zakharova@mail.ru', '123456789', {'Login': ['Short']}),
                               ('zakharova', 'zakharova.ru', '123456789', {'Email': ['Invalid']}),
