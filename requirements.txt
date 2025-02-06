@@ -7,3 +7,4 @@ pydantic
 pyhamcrest
 vyper-config
 allure-pytest
+swagger-coverage @https://github.com/Nastya-Leto/swagger-coverage-py/archive/refs/heads/master.zip
