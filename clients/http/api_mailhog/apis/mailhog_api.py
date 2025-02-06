@@ -1,4 +1,4 @@
-from restclient.client import RestClient
+from packages.restclient.client import RestClient
 
 class MailHogApi(RestClient):
     def get_message_from_mail(self, limit=1):
