@@ -5,3 +5,4 @@ curlify
 retrying
 pydantic
 pyhamcrest
+vyper-config
