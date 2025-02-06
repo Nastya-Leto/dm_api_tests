@@ -11,7 +11,6 @@ from pathlib import Path
 from swagger_coverage_py.reporter import CoverageReporter
 
 from helpers.account_helper import AccountHelper
-from packages.notifier.bot import send_file
 from packages.restclient.configuration import Configuration as MailhogConfiguration
 from packages.restclient.configuration import Configuration as DmApiConfiguration
 from services.api_mailhog import MailhogApi
