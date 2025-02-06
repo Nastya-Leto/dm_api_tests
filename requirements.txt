@@ -6,3 +6,4 @@ retrying
 pydantic
 pyhamcrest
 vyper-config
+allure-pytest

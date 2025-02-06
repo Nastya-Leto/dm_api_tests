@@ -1,8 +1,12 @@
+import allure
+
 from chekers.http_chekers import check_status_kode_http
 from chekers.post_v1_account_login import PostV1AccountLogin
 
-
+@allure.suite('Тесты на проверку метода post_v1_account_login')
+@allure.sub_suite('Проверка аутентификации пользователя')
 class TestLoginUser:
+    @allure.title('Проверка успешной аутентификации пользователя')
     def test_successful_login(self, account_helper, prepare_user):
         login = prepare_user.login
         password = prepare_user.password
@@ -13,6 +17,7 @@ class TestLoginUser:
             response = account_helper.user_login(login, password, validate_response=True)
             PostV1AccountLogin.check_response_value(response)
 
+    @allure.title('Проверка неуспешной аутентификации пользователя, при отсутствии активации')
     def test_unsuccessful_login(self, account_helper, prepare_user):
         login = prepare_user.login
         password = prepare_user.password

@@ -172,3 +172,4 @@ cython_debug/
 /otladka.py
 /simple
 /simple.py
+/tests/allure-results/

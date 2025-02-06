@@ -1,3 +1,4 @@
+import allure
 import structlog
 
 from chekers.http_chekers import check_status_kode_http
@@ -6,8 +7,10 @@ structlog.configure(
     processors=[
         structlog.processors.JSONRenderer(indent=4, ensure_ascii=True, sort_keys=True)])
 
-
+@allure.suite('Тесты на проверку метода post_v1_account_email')
+@allure.sub_suite('Проверка смены email пользователя')
 class TestChangeEmail:
+    @allure.title('Проверка успешной смены email пользователя')
     def test_successful_change_email_user(self, account_helper, prepare_user):
         login = prepare_user.login
         password = prepare_user.password
@@ -25,6 +28,7 @@ class TestChangeEmail:
                 account_helper.activation_user(token=token)
                 account_helper.user_login(login, password)
 
+    @allure.title('Проверка неуспешной смены email пользователя, при невалидном email')
     def test_unsuccessful_change_email_user(self, account_helper, prepare_user, ):
         login = prepare_user.login
         password = prepare_user.password
